@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="codebox" style="--char:851">
+       <pre> <h1><span class="auto-type">           
+#include &lt;meta/net.h&gt;
+
+int main() {
+    int serverSocket = meta_socket(AF_INET, SOCK_STREAM, 0);
+    // Set up server socket and bind it to a specific port
+
+    // Listen for incoming connections and handle requests
+    while (1) {
+        int clientSocket = meta_accept(serverSocket, NULL, NULL);
+        // Accept incoming connection from a client
+
+        // Handle the request and send the appropriate response
+        handleRequest(clientSocket);
+
+        // Close the client socket
+        meta_close(clientSocket);
+    }
+
+    // Close the server socket
+    meta_close(serverSocket);
+    return 0;
+}
+            </span></h1></pre>
+    </div>
+</body>
+</html>

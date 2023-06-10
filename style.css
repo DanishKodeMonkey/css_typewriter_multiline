@@ -1,0 +1,57 @@
+
+/*Just a stylish box div to hold the text*/
+#codebox{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    background-color: black;
+    border-style:solid;
+    border-width:2wpx;
+    border-color:#00FF00;
+    width:60%;
+    height:100%;
+    padding:2%;
+    transform-origin: top;
+}
+
+/*the autotype CSS style*/
+/*--char is the custom property that will be applied through the HTML page*/
+/*--char the custom property is assigned as per the number of characters to style with this.*/
+.auto-type {
+    /*Note- Monospace looks best for this*/
+    font-family: monospace;
+    color:#0000;
+    /*Some magic trickery here, we use gradients to color the "caret" and text*/
+    background:
+        /*Caret color, note the -90degree origin and the transparent first color*/
+        linear-gradient(-90deg,#00DFFC 5px,#0000 0) 10px 0,
+        /*text coloring*/
+        linear-gradient(#00FF00 0 0) 0 0;
+    /*calculate the size of the area to animate depending on the number of characters set*/
+    background-size:calc(var(--char)*1ch) 200%;
+    -webkit-background-clip:padding-box,text;
+    /*make the background clip out text that it doesn't cover*/
+    background-clip:padding-box,text;
+    /*Dont repeat the background*/
+    background-repeat:no-repeat;
+    /*Here comes the function of the magic, ANIMATIONS!*/
+    animation:
+        /*The caret animation consists of moving the caret up and down very quickly to make it look like it's blinking*/
+        caretanim .7s infinite steps(1),   
+        /*
+        The text animation resizes the background to fill out the entire letter space
+        this is calculated depending on the number of characters set.
+        Likewise, the steps of the animation, the length of it, is determined by the number of characters as well
+        */
+        textanim calc(var(--char)*.01s) steps(var(--char)) forwards;
+  }
+  @keyframes textanim{
+    /*The animation stretches the background by 200 percent*/
+    from {background-size:0 200%}
+  }
+  @keyframes caretanim{
+    /*The animation moves the caret up and down very fast*/
+    50% {background-position:0 -100%,0 0}
+  }
+  
